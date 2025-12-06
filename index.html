@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Tools Mahasiswa Indonesia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --biru-tua: #0f4c81;
+      --biru-muda: #eaf3fb;
+      --oranye: #f59e0b;
+      --teks: #1f2937;
+      --putih: #ffffff;
+      --shadow: 0 10px 30px rgba(15, 76, 129, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--teks);
+      background: radial-gradient(circle at 20% 20%, #f0f6ff, #f7fbff 40%, #ffffff 70%);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--biru-tua);
+      letter-spacing: 0.5px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-weight: 500;
+    }
+    .nav-links a { padding: 6px 10px; border-radius: 8px; transition: background 0.2s; }
+    .nav-links a:hover { background: var(--biru-muda); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      width: 24px;
+      height: 3px;
+      background: var(--biru-tua);
+      border-radius: 4px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+    section { padding: 90px 0; }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      align-items: center;
+      gap: 40px;
+      padding: 50px 0 20px;
+    }
+    .hero h1 { font-size: clamp(1.9rem, 3vw + 1rem, 3rem); margin: 0 0 12px; color: var(--biru-tua); }
+    .hero p { margin: 0 0 22px; max-width: 540px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--biru-tua), #1f6fb2);
+      color: var(--putih);
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(15,76,129,0.18); }
+    .illu {
+      position: relative;
+      width: 100%;
+      min-height: 260px;
+      background: linear-gradient(135deg, #d6e9ff, #edf6ff);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .illu::before, .illu::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+    .illu::before {
+      width: 160px; height: 160px;
+      background: rgba(15, 76, 129, 0.15);
+      top: -40px; right: 20px;
+    }
+    .illu::after {
+      width: 220px; height: 220px;
+      background: rgba(245, 158, 11, 0.18);
+      bottom: -80px; left: -20px;
+    }
+    .illu-content {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: var(--biru-tua);
+      text-align: center;
+      font-weight: 600;
+      gap: 10px;
+    }
+    .illu-badge {
+      padding: 8px 12px;
+      background: var(--putih);
+      border-radius: 999px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      font-size: 0.9rem;
+    }
+
+    /* Cards */
+    .section-title { margin: 0 0 14px; font-size: 1.8rem; color: var(--biru-tua); }
+    .section-sub { margin: 0 0 30px; color: #4b5563; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: var(--putih);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(15,76,129,0.12); }
+    .card h3 { margin-top: 0; margin-bottom: 10px; color: var(--biru-tua); }
+    .card p { margin-top: 0; color: #4b5563; }
+    label { display: block; font-weight: 600; margin: 10px 0 6px; }
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #d6e2f3;
+      background: #f8fbff;
+      font-size: 0.95rem;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+    input:focus, select:focus { outline: none; border-color: var(--biru-tua); box-shadow: 0 0 0 3px rgba(15,76,129,0.15); }
+    .inline-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; align-items: end; }
+    .mt-2 { margin-top: 12px; }
+    .result-box {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 12px;
+      background: #f1f7ff;
+      border: 1px solid #d7e5f7;
+      color: #1f2937;
+      font-weight: 600;
+    }
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; background: #e8f2ff; border-radius: 999px; font-size: 0.9rem; color: var(--biru-tua); }
+    .progress {
+      width: 100%;
+      height: 12px;
+      background: #e5ecf7;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 10px 0 4px;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(135deg, var(--biru-tua), #1f74c6);
+      transition: width 0.3s ease;
+    }
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+    .tip-box { background: var(--putih); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); }
+    footer { background: #0f172a; color: #e5e7eb; padding: 28px 0; text-align: center; }
+
+    /* Mobile nav */
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: absolute; top: 60px; right: 16px; background: var(--putih); flex-direction: column; width: 200px; padding: 12px; border-radius: 14px; box-shadow: var(--shadow); }
+      .nav-links.show { display: flex; }
+      .hamburger { display: flex; }
+      .inline-grid { grid-template-columns: 1fr; }
+      .navbar { padding: 14px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar container">
+      <div class="logo">Kampus Tools</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#panduan">Panduan</a></li>
+        <li><a href="#tentang">Tentang</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger" aria-label="Toggle menu" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="beranda">
+      <div class="container hero">
+        <div>
+          <div class="badge">💡 Untuk semua jurusan & kampus</div>
+          <h1>Tools untuk Mahasiswa Indonesia</h1>
+          <p>Bantu maba dan mahasiswa aktif mengatur kuliah, hitung IP semester, merencanakan SKS, dan cek checklist penting tanpa ribet.</p>
+          <button class="btn" onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'});">Mulai Pakai Tools</button>
+        </div>
+        <div class="illu">
+          <div class="illu-content">
+            <div class="illu-badge">📚 Kuliah terarah</div>
+            <div style="font-size: 2.2rem;">🎯</div>
+            <div style="font-weight:700;">IP bagus & rencana rapi</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tools">
+      <div class="container">
+        <h2 class="section-title">Tools Utama</h2>
+        <p class="section-sub">Tiga alat simpel untuk menemani perjalananmu di kampus. Isi data seperlunya, biar kami bantu hitung.</p>
+        <div class="grid">
+          <!-- Kalkulator IP -->
+          <div class="card">
+            <h3>📊 Kalkulator IP Semester</h3>
+            <p>Masukkan jumlah mata kuliah, isi data, lalu hitung IP-mu.</p>
+            <label for="jumlahMk">Jumlah mata kuliah</label>
+            <input type="number" id="jumlahMk" min="1" max="12" value="4" aria-label="Jumlah mata kuliah">
+            <button class="btn mt-2" id="generateBtn">Buat Form MK</button>
+            <div id="mkContainer" class="mt-2"></div>
+            <button class="btn mt-2" id="hitungIpBtn">Hitung IP</button>
+            <div class="result-box" id="ipResult">Hasil IP akan muncul di sini.</div>
+          </div>
+
+          <!-- Planner SKS -->
+          <div class="card">
+            <h3>🗺️ Planner SKS / Rencana Studi</h3>
+            <p>Hitung sisa SKS dan rata-rata SKS yang perlu kamu ambil per semester.</p>
+            <label for="targetSem">Target lulus (jumlah semester, contoh: 8)</label>
+            <input type="number" id="targetSem" min="1" value="8">
+            <label for="totalSks">Total SKS yang harus ditempuh</label>
+            <input type="number" id="totalSks" min="1" value="144">
+            <label for="takenSks">SKS yang sudah ditempuh</label>
+            <input type="number" id="takenSks" min="0" value="72">
+            <button class="btn mt-2" id="planBtn">Hitung Rencana</button>
+            <div class="result-box" id="planResult">Masukkan data dulu ya.</div>
+          </div>
+
+          <!-- Checklist -->
+          <div class="card">
+            <h3>✅ Checklist Maba</h3>
+            <p>Centang yang sudah beres, lihat progresmu.</p>
+            <div id="checklist">
+              <label><input type="checkbox" class="check-item"> Sudah aktivasi akun mahasiswa & email kampus</label>
+              <label><input type="checkbox" class="check-item"> Sudah kenal dengan dosen wali/pembimbing akademik</label>
+              <label><input type="checkbox" class="check-item"> Sudah bergabung di grup angkatan/jurusan</label>
+              <label><input type="checkbox" class="check-item"> Sudah baca panduan KRS di kampus kamu</label>
+              <label><input type="checkbox" class="check-item"> Sudah survei organisasi/himpunan/UKM yang mau diikuti</label>
+            </div>
+            <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+            <div id="progressText">0 dari 5 checklist sudah kamu selesaikan.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="panduan" style="background: var(--biru-muda);">
+      <div class="container">
+        <h2 class="section-title">Panduan Singkat Mahasiswa Baru</h2>
+        <p class="section-sub">Baca cepat, praktekkan segera. Cocok buat maba di kampus mana pun.</p>
+        <div class="tips-grid">
+          <div class="tip-box">
+            <h3>Tips KRS pertama kali</h3>
+            <p>Siapkan list mata kuliah prioritas, cek prasyarat, dan jangan lupa jam kuliah yang realistis. Selalu simpan bukti KRS dan pantau jadwal revisi.</p>
+          </div>
+          <div class="tip-box">
+            <h3>Bedanya organisasi, himpunan, dan BEM</h3>
+            <p>Organisasi kampus biasanya terbuka umum, himpunan fokus ke jurusan, BEM fokus ke advokasi mahasiswa. Pilih sesuai minat dan waktu yang kamu punya.</p>
+          </div>
+          <div class="tip-box">
+            <h3>Tips bagi waktu kuliah & organisasi</h3>
+            <p>Gunakan kalender digital, blok waktu belajar sebelum rapat, dan tentukan batas maksimal kegiatan. Ingat: akademik tetap nomor satu.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tentang">
+      <div class="container">
+        <h2 class="section-title">Tentang Website</h2>
+        <p class="section-sub">Kampus Tools bukan website resmi kampus manapun, tetapi inisiatif independen untuk membantu mahasiswa di seluruh Indonesia. Selalu cek informasi resmi dari website dan media sosial resmi kampus kamu.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>Dibuat dengan ❤️ untuk mahasiswa Indonesia</div>
+      <div style="margin-top:6px; font-size:0.95rem;">Kontak: email@kamputools.id | IG: @kamputools</div>
+    </div>
+  </footer>
+
+  <script>
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('show'));
+    hamburger.addEventListener('keypress', (e) => { if (e.key === 'Enter') navLinks.classList.toggle('show'); });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('show')));
+
+    // Kalkulator IP
+    const gradeMap = { 'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'C+': 2.3, 'C': 2.0, 'D': 1.0, 'E': 0 };
+    const mkContainer = document.getElementById('mkContainer');
+    const jumlahMkInput = document.getElementById('jumlahMk');
+    const generateBtn = document.getElementById('generateBtn');
+    const hitungIpBtn = document.getElementById('hitungIpBtn');
+    const ipResult = document.getElementById('ipResult');
+
+    function generateMkForm() {
+      const jumlah = Math.min(Math.max(parseInt(jumlahMkInput.value) || 0, 1), 12);
+      mkContainer.innerHTML = '';
+      for (let i = 1; i <= jumlah; i++) {
+        const row = document.createElement('div');
+        row.className = 'inline-grid';
+        row.innerHTML = `
+          <div>
+            <label>Nama MK ${i}</label>
+            <input type="text" placeholder="Contoh: Kalkulus ${i}" aria-label="Nama mata kuliah ${i}">
+          </div>
+          <div>
+            <label>SKS</label>
+            <input type="number" min="1" placeholder="3" aria-label="SKS mata kuliah ${i}">
+          </div>
+          <div>
+            <label>Nilai</label>
+            <select aria-label="Nilai mata kuliah ${i}">
+              ${Object.keys(gradeMap).map(n => `<option value="${n}">${n}</option>`).join('')}
+            </select>
+          </div>`;
+        mkContainer.appendChild(row);
+      }
+    }
+
+    function hitungIP() {
+      const rows = mkContainer.querySelectorAll('.inline-grid');
+      let totalBobot = 0;
+      let totalSks = 0;
+      for (const row of rows) {
+        const sksInput = row.querySelector('input[type="number"]');
+        const select = row.querySelector('select');
+        const sks = parseFloat(sksInput.value);
+        if (!sks || sks <= 0) {
+          ipResult.textContent = 'Ada SKS yang kosong atau nol. Lengkapi dulu ya.';
+          return;
+        }
+        totalSks += sks;
+        totalBobot += sks * (gradeMap[select.value] || 0);
+      }
+      const ip = totalBobot / (totalSks || 1);
+      const pesan = ip >= 3.5 ? 'Keren! Pertahankan prestasimu 💪' : ip >= 3.0 ? 'Bagus! Masih bisa ditingkatkan lagi 😄' : 'Jangan menyerah, evaluasi dan coba strategi belajar baru ✨';
+      ipResult.textContent = `IP Semester: ${ip.toFixed(2)} | ${pesan}`;
+    }
+
+    generateBtn.addEventListener('click', generateMkForm);
+    hitungIpBtn.addEventListener('click', hitungIP);
+    generateMkForm();
+
+    // Planner SKS
+    const planBtn = document.getElementById('planBtn');
+    const planResult = document.getElementById('planResult');
+    planBtn.addEventListener('click', () => {
+      const targetSem = Math.max(1, parseInt(document.getElementById('targetSem').value) || 0);
+      const totalSks = Math.max(1, parseInt(document.getElementById('totalSks').value) || 0);
+      const takenSks = Math.max(0, parseInt(document.getElementById('takenSks').value) || 0);
+      if (takenSks > totalSks) {
+        planResult.textContent = 'SKS ditempuh tidak boleh lebih besar dari total SKS.';
+        return;
+      }
+      const remaining = totalSks - takenSks;
+      const idealPerSem = totalSks / targetSem;
+      const doneSem = Math.max(1, Math.min(targetSem, Math.round(takenSks / (idealPerSem || 1)) || 1));
+      const semestersLeft = Math.max(1, targetSem - doneSem);
+      const avgFuture = remaining / semestersLeft;
+      planResult.innerHTML = `Sisa SKS: <strong>${remaining}</strong><br>Rata-rata SKS per semester ke depan: <strong>${avgFuture.toFixed(1)}</strong><br><small>Sesuaikan dengan aturan maksimum SKS di kampusmu ya.</small>`;
+    });
+
+    // Checklist
+    const checkItems = document.querySelectorAll('.check-item');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+
+    function updateChecklist() {
+      const total = checkItems.length;
+      const done = Array.from(checkItems).filter(c => c.checked).length;
+      const percent = Math.round((done / total) * 100);
+      progressBar.style.width = `${percent}%`;
+      progressText.textContent = `${done} dari ${total} checklist sudah kamu selesaikan.`;
+    }
+    checkItems.forEach(item => item.addEventListener('change', updateChecklist));
+    updateChecklist();
+  </script>
+</body>
+</html>
