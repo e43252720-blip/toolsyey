@@ -13,7 +13,7 @@
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/e43252720-blip/tools-app.git
+git clone https://github.com/calvin-aprilian/tools-app.git
 cd tools-app
 npm install
 ```
@@ -21,7 +21,6 @@ npm install
 ## ⚡ Quick Start
 
 ```bash
-# Development mode
 npm run dev
 ```
 
